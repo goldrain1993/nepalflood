@@ -328,7 +328,7 @@ button:disabled{opacity:.42;cursor:not-allowed}
     </div>
     <div class="startFooter">
       <span>신정중학교 정보 · Data Disaster Lab</span>
-      <span><button id="soundToggle" type="button" style="min-height:28px;padding:2px 9px;font-size:10px" title="소리 켜기/끄기" aria-label="소리 켜기/끄기">🔊</button> · v22</span>
+      <span><button id="soundToggle" type="button" style="min-height:28px;padding:2px 9px;font-size:10px" title="소리 켜기/끄기" aria-label="소리 켜기/끄기">🔊</button> · v23</span>
     </div>
   </div>
 </div>
@@ -1459,12 +1459,12 @@ function calculatePerformanceRank(avgFail,missRate,falseRate){
   const precisionScore=15*clamp(1-falseRate/100,0,1);
   const score=Math.round((safetyScore+detectionScore+precisionScore)*10)/10;
 
-  // Legend is intentionally much stricter than S and is designed as a roughly
-  // "top 1% / near-theoretical-best" target, not an ordinary classroom grade.
+  // Legend requires both an exceptional composite score and zero missed floods.
+  // This keeps the hidden top rank educationally strict on safety.
   let rank,desc,css;
-  if(score>=97 && missRate<=1.0 && falseRate<=3.0 && avgFail<=38){
+  if(score>=97 && missRate===0){
     rank="LEGEND";css="rank-legend";
-    desc="거의 완벽한 조기경보 시스템입니다. 홍수 놓침이 사실상 없고 오경보도 매우 낮은 희소 성능입니다.";
+    desc="종합 성능 점수 97점 이상이며 홍수를 한 번도 놓치지 않은 최상위 조기경보 시스템입니다.";
   }else if(score>=90){
     rank="S";css="rank-s";
     desc="매우 안정적인 시스템입니다. 대부분의 재난에서 빠르게 감지하면서 오경보도 잘 억제했습니다.";
